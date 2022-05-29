@@ -1,0 +1,19 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^3.14.0",
+    "fastify": "^3.29.0",
+    "fastify-autoload": "^3.13.0"
+  },
+  "devDependencies": {
+    "prisma": "^3.14.0"
+  }
+}
