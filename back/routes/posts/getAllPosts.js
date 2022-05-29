@@ -1,6 +1,7 @@
 const sanitizer = require('sanitizer')
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
+const { checkHeaders, checkTokenUserId } = require("../../plugins/auth");
 
 async function getAllPosts (fastify, options) {
     fastify.route({
@@ -11,6 +12,7 @@ async function getAllPosts (fastify, options) {
     })
     // à continuer
     async function handler(req, res, next) {      
+        if(!checkHeaders(req.headers.authorization)) return res.code(401).send('Invalid token')
         const findPosts = await prisma.post.findMany({
             include: {
                 author: {

@@ -1,5 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const { checkHeaders, checkTokenUserId } = require("../../plugins/auth");
 
 async function getOneUser(fastify, options) {
   fastify.route({
@@ -10,6 +11,7 @@ async function getOneUser(fastify, options) {
   });
 
   async function handler(req, res, next) {
+    if(!checkHeaders(req.headers.authorization)) return res.code(401).send('Invalid token')
     const id = parseInt(req.params.id);
     const user = await prisma.user.findUnique({
       where: {

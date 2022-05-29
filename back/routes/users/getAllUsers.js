@@ -1,5 +1,6 @@
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
+const { checkHeaders, checkTokenUserId } = require("../../plugins/auth");
 
 async function getAllUsers (fastify, options) {
     fastify.route({
@@ -9,7 +10,8 @@ async function getAllUsers (fastify, options) {
         handler: handler
     })
 
-    async function handler() {
+    async function handler(req, res, next) {
+        if(!checkHeaders(req.headers.authorization)) return res.code(401).send('Invalid token')
         const users = await prisma.user.findMany({
             select: {
                 id: true,
