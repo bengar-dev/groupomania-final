@@ -2,6 +2,8 @@ const fastify = require('fastify')({
     logger: true
 })
 
+fastify.register(require('./routes/posts/createPost'))
+
 fastify.register(require('./routes/users/getAllUsers'))
 fastify.register(require('./routes/users/getUser'))
 fastify.register(require('./routes/users/createUser'))
