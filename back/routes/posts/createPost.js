@@ -1,4 +1,5 @@
 const sanitizer = require('sanitizer')
+const jwt = require('jsonwebtoken')
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
@@ -11,11 +12,14 @@ async function createPost (fastify, options) {
     })
     // à continuer
     async function handler(req, res, next) {      
+        const headers =  req.headers.authorization.split(' ')[1]
+        const decodedToken = jwt.verify(headers, process.env.TOKEN_KEY)
+        const userId = decodedToken.userId
         const newPost = await prisma.post.create({
             data: {
-                content: req.body.content,
+                content: sanitizer.escape(req.body.content),
                 image: req.body.image,
-                authorId: req.body.authorId
+                authorId: userId
             }
         })
         return 'Publication has been published'
