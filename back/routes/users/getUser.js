@@ -17,6 +17,7 @@ async function getOneUser(fastify, options) {
       },
       select: {
           id: true,
+          createdAt: true,
           firstname: true,
           lastname: true,
           email: true,

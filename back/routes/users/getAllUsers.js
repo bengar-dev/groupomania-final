@@ -10,7 +10,16 @@ async function getAllUsers (fastify, options) {
     })
 
     async function handler() {
-        const users = await prisma.user.findMany()
+        const users = await prisma.user.findMany({
+            select: {
+                id: true,
+                createdAt: true,
+                firstname: true,
+                lastname: true,
+                email: true,
+                avatar: true
+            }
+        })
         return users
     }
 }

@@ -6,6 +6,8 @@ fastify.register(require('./routes/users/getAllUsers'))
 fastify.register(require('./routes/users/getUser'))
 fastify.register(require('./routes/users/createUser'))
 fastify.register(require('./routes/users/loginUser'))
+fastify.register(require('./routes/users/deleteUser'))
+fastify.register(require('./routes/users/editUser'))
 
 const start = async() => {
     try {
