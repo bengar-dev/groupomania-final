@@ -13,6 +13,7 @@
     "bcrypt": "^5.0.1",
     "fastify": "^3.29.0",
     "fastify-autoload": "^3.13.0",
+    "jsonwebtoken": "^8.5.1",
     "sanitizer": "^0.1.3"
   },
   "devDependencies": {
