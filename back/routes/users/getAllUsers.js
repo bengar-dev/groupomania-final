@@ -1,7 +1,7 @@
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
 
-async function usersRoutes (fastify, options) {
+async function getAllUsers (fastify, options) {
     fastify.route({
         method: 'GET',
         url: '/api/users',
@@ -22,7 +22,10 @@ const response =  {
             type: 'object',
             properties: {
                 id: {type: 'number'},
-                firstname: {type: 'string'}
+                firstname: {type: 'string'},
+                lastname: {type: 'string'},
+                email: {type: 'string'},
+                avatar: {type: 'avatar'}
             }
         }
     }
@@ -30,4 +33,4 @@ const response =  {
 
 const schema = { ...response }
 
-module.exports = usersRoutes
+module.exports = getAllUsers

@@ -3,6 +3,7 @@ const fastify = require('fastify')({
 })
 
 fastify.register(require('./routes/users/getAllUsers'))
+fastify.register(require('./routes/users/createUser'))
 
 const start = async() => {
     try {
