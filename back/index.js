@@ -4,6 +4,9 @@ const fastify = require('fastify')({
 
 fastify.register(require('./routes/posts/createPost'))
 fastify.register(require('./routes/posts/getAllPosts'))
+fastify.register(require('./routes/posts/getPost'))
+fastify.register(require('./routes/posts/editPost'))
+fastify.register(require('./routes/posts/deletePost'))
 
 fastify.register(require('./routes/users/getAllUsers'))
 fastify.register(require('./routes/users/getUser'))
