@@ -18,6 +18,7 @@ model User {
   lastname  String   @db.VarChar(255)
   avatar    String   @default("https://www.belin.re/wp-content/uploads/2018/11/default-avatar.png") @db.VarChar(255)
   posts     Post[]
+  comments Comment[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -29,6 +30,17 @@ model Post {
   userArray String   @db.Text @default("[]")
   authorId  Int
   author    User     @relation(fields: [authorId], references: [id])
+  comments Comment[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Comment {
+  id Int @id @default(autoincrement())
+  authorId Int
+  author User @relation(fields: [authorId], references: [id])
+  postId Int
+  post Post @relation(fields: [postId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
