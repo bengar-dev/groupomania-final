@@ -4,10 +4,10 @@ const { PrismaClient } = require("@prisma/client");
 const { checkHeaders, checkTokenUserId } = require("../../plugins/auth");
 const prisma = new PrismaClient();
 
-async function deleteOnePost(fastify, options) {
+async function createCmt(fastify, options) {
   fastify.route({
-    method: "DELETE",
-    url: "/api/posts/:id",
+    method: "POST",
+    url: "/api/posts/:id/cmt",
     schema: schema,
     handler: handler,
   });
@@ -15,25 +15,21 @@ async function deleteOnePost(fastify, options) {
   async function handler(req, res, next) {
     if(!checkHeaders(req.headers.authorization)) return res.code(401).send('Invalid token')
     const userId = checkTokenUserId(req.headers.authorization);
-    const id = parseInt(req.params.id)
+    const postId = parseInt(req.params.id)
     const findPost = await prisma.post.findUnique({
-      where:{
-        id
-      }
+        where:{
+            id: postId
+        }
     })
     if(!findPost) return res.code(401).send('Publication not found')
-    if(findPost.authorId !== userId) return res.code(401).send('This is not your publication')
-    const deleteComments = await prisma.comment.deleteMany({
-      where: {
-        postId: id
-      }
-    })
-    const deletePost = await prisma.post.delete({
-      where: {
-        id
-      }
-    })
-    return "Publication has been deleted";
+    const newComment = await prisma.comment.create({
+      data: {
+        content: sanitizer.escape(req.body.content),
+        authorId: userId,
+        postId
+      },
+    });
+    return "Comments has been published";
   }
 }
 
@@ -45,4 +41,4 @@ const response = {
 
 const schema = { ...response };
 
-module.exports = deleteOnePost;
+module.exports = createCmt;

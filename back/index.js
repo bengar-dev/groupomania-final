@@ -15,6 +15,11 @@ fastify.register(require('./routes/users/loginUser'))
 fastify.register(require('./routes/users/deleteUser'))
 fastify.register(require('./routes/users/editUser'))
 
+fastify.register(require('./routes/comments/createCmt'))
+fastify.register(require('./routes/comments/editCmt'))
+fastify.register(require('./routes/comments/getAllCmts'))
+fastify.register(require('./routes/comments/deleteCmt'))
+
 const start = async() => {
     try {
         await fastify.listen(3000)
