@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom'
 
-import Signin from './pages/signin';
+import Signin from './pages/Signin';
 import Error from './pages/404'
 
 function App() {
