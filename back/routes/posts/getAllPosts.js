@@ -22,7 +22,8 @@ async function getAllPosts (fastify, options) {
                         firstname: true,
                         lastname: true,
                         email: true,
-                        avatar: true
+                        avatar: true,
+                        comments: true
                     }
                 }
             }
