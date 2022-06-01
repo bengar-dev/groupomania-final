@@ -1,0 +1,14 @@
+button {
+    padding:8px;
+    font-weight: 500;
+    background:white;
+    border:1px solid $secondary;
+    border-radius: 2px;
+    transition: all 250ms ease-in-out;
+    cursor: pointer;
+    &:hover {
+        background-color: $valid;
+        border-color:$valid;
+        color:$valid-text;
+    }
+}
