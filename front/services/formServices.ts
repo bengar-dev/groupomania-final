@@ -3,7 +3,12 @@ import {axios} from './config'
 
 export const getRegister = (email: string, password:string, firstname: string, lastname: string) => {
 
-    const data = {
+    const data :{
+        email: string,
+        password: string,
+        firstname: string,
+        lastname: string
+    } = {
         email,
         password,
         firstname,
@@ -20,26 +25,25 @@ export const getRegister = (email: string, password:string, firstname: string, l
 
 }
 
-interface resSignInProps {
-    data: object 
-}
-
-interface errSignInProps {
-    response: object
-}
-
 export const getSignIn = (email: string, password: string) => {
 
-    const data = {
+    const data: {
+        email: string,
+        password: string
+    } = {
         email,
         password
     }
 
     return axios.post(`${api}/users/signin`, data)
-        .then((response: resSignInProps) => {
+        .then((response: {
+            data: object
+        }) => {
             return response.data
         })
-        .catch((error: errSignInProps) => {
+        .catch((error: {
+            response: object
+        }) => {
             return error.response
         })
 }

@@ -1,22 +1,18 @@
 import {api, axios} from "./config"
 
 export const getUserInfo = (id: number, token: string) => {
-
-    interface resProps {
-        data: object 
-    }
     
-    interface errProps {
-        response: object
-    }
-
     return axios.get(`${api}/users/${id}`, {
         headers: {"Authorization": `Bearer ${token}`}
     })
-        .then((response: resProps) => {
+        .then((response: {
+            data: object
+        }) => {
             return response.data
         })
-        .catch((error: errProps) => {
+        .catch((error: {
+            response: object
+        }) => {
             return error.response
         })
 }
