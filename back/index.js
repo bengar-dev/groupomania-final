@@ -2,6 +2,16 @@ const fastify = require('fastify')({
     logger: true
 })
 
+fastify.register(require('fastify-cors'), { 
+    origin: (origin, cb) => {
+        if(/localhost/.test(origin)){
+            cb(null, true)
+            return
+          }
+          cb(new Error("Not allowed"))
+          }
+  })
+
 fastify.register(require('./routes/posts/createPost'))
 fastify.register(require('./routes/posts/getAllPosts'))
 fastify.register(require('./routes/posts/getPost'))

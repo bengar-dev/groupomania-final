@@ -1,14 +1,27 @@
 button {
     padding:8px;
     font-weight: 500;
-    background:white;
-    border:1px solid $secondary;
     border-radius: 2px;
     transition: all 250ms ease-in-out;
     cursor: pointer;
+}
+
+.btn-valid {
+    background:white;
+    border:1px solid $secondary;
     &:hover {
         background-color: $valid;
         border-color:$valid;
         color:$valid-text;
+    }
+}
+
+.btn-del {
+    background:$del;
+    border:1px solid $del;
+    &:hover {
+        background-color: $del-alt;
+        border-color:$del-alt;
+        color:$del-text;
     }
 }
